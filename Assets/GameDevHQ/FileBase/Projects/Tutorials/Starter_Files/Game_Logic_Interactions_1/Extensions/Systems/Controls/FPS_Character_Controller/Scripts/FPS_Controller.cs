@@ -58,8 +58,26 @@ namespace GameDevHQ.FileBase.Plugins.FPS_Character_Controller
             }
 
             FPSController();
+            Shooting();
             CameraController();
             HeadBobbing(); 
+        }
+
+        void Shooting()
+        {
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Ray camView = _fpsCamera.ViewportPointToRay(new Vector3(0.5f,0.5f,0f));
+                RaycastHit _hit;
+                if (Physics.Raycast(camView, out _hit))
+                {
+                    if (_hit.collider.tag.Equals("Enemy"))
+                    {
+                        EnemyAI enemy = _hit.collider.GetComponent<EnemyAI>();
+                        enemy.GotHit();
+                    }
+                }
+            }
         }
 
         void FPSController()
