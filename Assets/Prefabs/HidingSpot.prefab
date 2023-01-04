@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2284576145885953468}
   - component: {fileID: 6652777394688242398}
   - component: {fileID: 6387042143133791048}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HidingSpot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
