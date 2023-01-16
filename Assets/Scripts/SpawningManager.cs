@@ -12,6 +12,7 @@ public class SpawningManager : MonoBehaviour
     [SerializeField]private int _MaxEnemies = 100;
     [SerializeField] private float _spawnMinTime = 3f;
     [SerializeField] private float _spawnMaxTime = 6f;
+    private int NumEnemiesSpawned = 0;
 
     private float _spawnTimer = -1;
     private static SpawningManager _instance;
@@ -77,7 +78,11 @@ public class SpawningManager : MonoBehaviour
         if (_spawnTimer < Time.time)
         {
             _spawnTimer = Time.time + Random.Range(_spawnMinTime,_spawnMaxTime);
-            RequestEnemy();
+            NumEnemiesSpawned++;
+            if (NumEnemiesSpawned <= 100)
+            {
+                RequestEnemy();
+            }
         }
     }
 }

@@ -66,8 +66,9 @@ namespace GameDevHQ.FileBase.Plugins.FPS_Character_Controller
 
         void Shooting()
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && UIManager.Instance.GetAmmo() > 0)
             {
+                UIManager.Instance.UseAmmo();
                 Ray camView = _fpsCamera.ViewportPointToRay(new Vector3(0.5f,0.5f,0f));
                 RaycastHit _hit;
                 if (Physics.Raycast(camView, out _hit))

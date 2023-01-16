@@ -59,6 +59,7 @@ public class EnemyAI : MonoBehaviour
         {
             _startDying = false;
             _animator.SetTrigger("Death");
+            UIManager.Instance.EnemyDestroyed();
             _agent.isStopped = true;
         }
     }

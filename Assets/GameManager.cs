@@ -9,12 +9,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Transform> _HidingSpots;
     private static GameManager _instance;
     [SerializeField] private Transform _endingPoint;
+    [Tooltip("Enter Time in Minutes multiplied 60. Ex: 10*60")][SerializeField] private float _TimeRemaining; 
 
     private int _score = 0;
 
     public void AddScore(int score)
     {
         _score += score;
+        UIManager.Instance.SetScore(_score.ToString());
     }
 
     public int GetScore()
@@ -53,13 +55,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Start()
+    void TimeRemaining()
     {
-        
-    }
+        _TimeRemaining -= Time.deltaTime;
+        float mRemaining = (_TimeRemaining / 60);
+        float sRemaining = (_TimeRemaining % 60);
+        UIManager.Instance.SetTime(Mathf.FloorToInt(mRemaining).ToString(),Mathf.FloorToInt(sRemaining).ToString());
 
+        if (_TimeRemaining <= 0)
+        {
+            ///GameOver here
+        }
+    }
     // Update is called once per frame
     void Update()
+    {
+        TimeRemaining();
+    }
+
+    public void GameOver()
     {
         
     }
