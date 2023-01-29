@@ -42,6 +42,8 @@ namespace GameDevHQ.FileBase.Plugins.FPS_Character_Controller
         private float _lookSensitivity = 5.0f; //mouse sensitivity 
 
         private Camera _fpsCamera;
+
+        [SerializeField] private AudioClip _shot;
         private void Start()
         {
             _controller = GetComponent<CharacterController>(); //assign the reference variable to the component
@@ -69,6 +71,7 @@ namespace GameDevHQ.FileBase.Plugins.FPS_Character_Controller
             if (Input.GetKeyDown(KeyCode.Mouse0) && UIManager.Instance.GetAmmo() > 0)
             {
                 UIManager.Instance.UseAmmo();
+                AudioSource.PlayClipAtPoint(_shot,transform.position);
                 Ray camView = _fpsCamera.ViewportPointToRay(new Vector3(0.5f,0.5f,0f));
                 RaycastHit _hit;
                 if (Physics.Raycast(camView, out _hit))
@@ -79,6 +82,15 @@ namespace GameDevHQ.FileBase.Plugins.FPS_Character_Controller
                         enemy.GotHit();
                     }
                 }
+            }
+
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                _fpsCamera.fieldOfView = 20;
+            }
+            else if(Input.GetKeyUp(KeyCode.Mouse1))
+            {
+                _fpsCamera.fieldOfView = 55;
             }
         }
 

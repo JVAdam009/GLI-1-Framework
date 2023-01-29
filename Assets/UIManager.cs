@@ -41,22 +41,18 @@ public class UIManager : MonoBehaviour
 
     public void EnemyDestroyed()
     {
-        int enemies;
-        int.TryParse(_EnemyText.text,out enemies);
-        _EnemyText.text = (enemies - 1).ToString();
+        _EnemyText.text = GameManager.Instance.GetEnemiesRemaining().ToString();
     }
 
     public void UseAmmo()
     {
-        int ammo;
-        int.TryParse(_AmmoText.text,out ammo);
+        int.TryParse(_AmmoText.text,out var ammo);
         _AmmoText.text = (ammo - 1).ToString();
     }
 
     public int GetAmmo()
     {
-        int ammo;
-        int.TryParse(_AmmoText.text, out ammo);
+        int.TryParse(_AmmoText.text, out var ammo);
         return ammo;
     }
 

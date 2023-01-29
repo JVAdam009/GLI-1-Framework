@@ -66,6 +66,7 @@ MonoBehaviour:
   _currentSpot: 0
   _increment: 4
   _state: 0
+  _deathSFX: {fileID: 8300000, guid: e316c3cd0fc785348875a38099e3fbba, type: 3}
 --- !u!195 &5195462788362335918
 NavMeshAgent:
   m_ObjectHideFlags: 0

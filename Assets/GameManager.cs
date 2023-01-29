@@ -9,9 +9,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Transform> _HidingSpots;
     private static GameManager _instance;
     [SerializeField] private Transform _endingPoint;
-    [Tooltip("Enter Time in Minutes multiplied 60. Ex: 10*60")][SerializeField] private float _TimeRemaining; 
-
+    [Tooltip("Enter Time in Minutes multiplied 60. Ex: 10*60")][SerializeField] private float _TimeRemaining;
+    [SerializeField] private GameObject _winUI;
+    [SerializeField] private GameObject _LoseUI;
     private int _score = 0;
+    private int _enemiesEscaped = 0;
+    private int _enemiesDestroyed = 0;
+    
 
     public void AddScore(int score)
     {
@@ -22,6 +26,31 @@ public class GameManager : MonoBehaviour
     public int GetScore()
     {
         return _score;
+    }
+
+    public int GetEnemiesRemaining()
+    {
+        return _enemiesEscaped + _enemiesEscaped;
+    }
+
+    public void EnemyDestoryed()
+    {
+        _enemiesDestroyed += 1;
+        if (SpawningManager.Instance.MaximumNumberOfEnemies() == _enemiesDestroyed)
+        {
+            //Game Over
+            GameOver();
+        }
+    }
+
+    public void EnemyEscaped()
+    {
+        _enemiesEscaped += 1;
+        if (SpawningManager.Instance.MaximumNumberOfEnemies() / 2 >= _enemiesEscaped)
+        {
+            //Game Over
+            GameOver();
+        }
     }
 
     public static GameManager Instance
@@ -40,6 +69,7 @@ public class GameManager : MonoBehaviour
     {
         _instance = this;
     }
+    
 
     public Vector3 GenerateNextHidingSpot(ref int currentSpot,int SpotIncrement)
     {
@@ -64,7 +94,8 @@ public class GameManager : MonoBehaviour
 
         if (_TimeRemaining <= 0)
         {
-            ///GameOver here
+            //Game Over
+            GameOver();
         }
     }
     // Update is called once per frame
@@ -75,6 +106,14 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        
+        //GameOver here
+        if (_enemiesEscaped < SpawningManager.Instance.MaximumNumberOfEnemies() / 2)
+        {
+            //Win
+        }
+        else
+        {
+            //Lose
+        }
     }
 }

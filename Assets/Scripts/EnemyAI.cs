@@ -19,6 +19,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private int _increment = 4;
 
     [SerializeField] private States _state = States.Running;
+    [SerializeField] private AudioClip _deathSFX;
 
     private bool _startHiding = false;
     private bool _startDying = false;
@@ -60,7 +61,9 @@ public class EnemyAI : MonoBehaviour
             _startDying = false;
             _animator.SetTrigger("Death");
             UIManager.Instance.EnemyDestroyed();
+            GameManager.Instance.EnemyDestoryed();
             _agent.isStopped = true;
+            AudioSource.PlayClipAtPoint(_deathSFX,transform.position);
         }
     }
 
